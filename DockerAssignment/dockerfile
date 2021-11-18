@@ -1,0 +1,12 @@
+FROM wurstmeister/kafka
+
+MAINTAINER Riya
+
+RUN apk add --update --no-cache curl py-pip && \
+	pip install kafka-python
+
+COPY python-code .
+
+COPY server.properties /opt/kafka/config/server.properties
+
+CMD /opt/kafka/bin/kafka-server-start.sh /opt/kafka/config/server.properties 
